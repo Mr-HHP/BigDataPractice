@@ -1,0 +1,24 @@
+// 指定protobuf的版本
+syntax = "proto3";
+// 指定Java代码的包名
+option java_package = "my.protobuf_test";
+
+message Preson {
+    string name = 1;
+    int32 id = 2;
+    string email = 3;
+
+    enum PhoneType {
+        MOBILE = 0;
+        HOME = 1;
+        WORK = 2;
+    }
+
+    message PhoneNumber {
+        string number = 1;
+        PhoneType type = 2;
+    }
+
+    repeated PhoneNumber phone = 4;
+}
+
