@@ -21,5 +21,6 @@ public class Runing {
             .build();
   
     System.out.println(john);
+    System.out.println();
   }
 }
