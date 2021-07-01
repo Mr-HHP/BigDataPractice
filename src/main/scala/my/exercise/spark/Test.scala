@@ -5,7 +5,7 @@ import java.sql.{DriverManager, ResultSet}
 import my.protobuf_test.PresonOuterClass
 import org.apache.spark.HashPartitioner
 import org.apache.spark.rdd.{JdbcRDD, RDD}
-import org.apache.spark.sql.{Dataset, Row, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 import org.apache.spark.sql.functions._
 
 import scala.collection.mutable.ArrayBuffer
@@ -22,91 +22,53 @@ object Test {
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession
             .builder()
-            .appName("test")
             .master("local[*]")
+            .appName("spark_test")
             .getOrCreate()
-    
     import spark.implicits._
+    val seq: Seq[(String, Int, String)] = Seq(("a", 1, "小明"), ("b", 2, "小张"))
+    val df: DataFrame = seq.toDF()
+//    df.show(false)
+//    df.select(expr("*"), lit(1).as("One")).show(false)
+//    df.withColumn("id", expr("_1")).show(false)
+//    df.where(col(""))
+//    df.where("").distinct().sample(9)
+//    df.where($"_1" =!= "a").show(false)
+//    df.where($"_1" === "a").show(false)
+//    df.sort($"_1").show(false)
+//    df.sort(expr("_1 asc")).show(false)
+//    df.sort(desc("_1")).show(false)
+//    df.sort("_1")
+//    df.orderBy(col("_1"))
+//    df.orderBy("_1")
+//    df.orderBy(expr("_1 desc")).show(false)
+//    df.orderBy(desc("_1")).show(false)
+//    df.orderBy(expr("_1 asc")).show(false)
+//    df.sortWithinPartitions("")
+//    df.select(lit(4) === "")
+//    val it = df.toLocalIterator()
+    df.where("_2 = 1").show(false)
+    df.where("_2 <> 1").show(false)
+    df.describe().show(false)
+//    val D = col("") === ""
+//    df.withColumn("", (col("") === "").and(D))
+//    df.select(pow(col(""), 2))
+//    df.stat.corr("", "")
+//    df.select(corr("", ""))
+//    df.stat.approxQuantile("", )
+    df.stat.crosstab("", "")
+    initcap(col(""))
+    regexp_replace(col(""), "", "")
+    translate(col(""), "", "")
+    instr(col(""), "")
+    regexp_extract(col(""), "", 9)
+    lpad(col(""), 9, "")
+    df.select(initcap(col("")))
     
-    val list1 = List(("a", 1), ("b", 2), ("c", 3), ("a", 4))
-    val list2 = List(("a", 1), ("d", 2), ("b", 3), ("e", 4))
-    val rdd1 = spark.sparkContext.parallelize(list1)
-    val rdd2 = spark.sparkContext.parallelize(list2)
-    val ds1 = rdd1.toDF().as[L]
-    rdd1.toDF().show(false)
-    
-    ds1.show(false)
-    
-    val ds11 = ds1.map(d => d.copy(_1 = "iii"))
-    ds11.show(false)
-    
-    val ds111 = ds11.flatMap(d => {
-      val result = new ArrayBuffer[L]
-      result.append(d)
-      result.append(d.copy(_1 = "jjj"))
-      result
-    })
-    
-    ds111.show(false)
-    
-    val ds1111 = ds11.map(d => {
-      val result = new ArrayBuffer[L]
-      result.append(d)
-      result.append(d.copy(_1 = "jjj"))
-      result
-    })
-    ds1111.show(false)
+    df.stat
     
     
-    
-    //    println("{}".format(rdd1.join(rdd2).collect()))
-    //    rdd1.join(rdd2).collect().foreach(print)
-    //    println()
-    //    rdd1.leftOuterJoin(rdd2).collect().foreach(print)
-    //    println()
-    //    rdd1.rightOuterJoin(rdd2).collect().foreach(print)
-    //    println()
-    //    rdd1.fullOuterJoin(rdd2).collect().foreach(print)
-    
-    //    val rdd1 = spark.sparkContext.parallelize(list1, 1)
-    //
-    //
-    //    val df1 = rdd1.toDF()
-    //    //    df1.select("*").sort($"")
-    //    df1.show(false)
-    //    //    df1.select("*")
-    //    //            .groupBy($"_1")
-    //    //            .agg(last($"_1"), last($"_2"), collect_list($"_1"))
-    //    //            .show(false)
-    //    df1.printSchema()
-    //    rdd1
-    //            .toDF
-    //            .map((row: Row) => {
-    //              Seq(row.getAs[String]("_1"), row.get(1).toString)
-    //            })
-    //            .show(false)
-    //    rdd1.toDF()
-    //            .flatMap(row => {
-    //              Seq(row.getAs[String]("_1"), row.get(1).toString)
-    //            })
-    //            .show(false)
-    //
-    //
-    //    val john: PresonOuterClass.Preson = PresonOuterClass
-    //            .Preson
-    //            .newBuilder()
-    //            .setName("John Doe")
-    //            .setId(1234)
-    //            .setEmail("jode@example.com")
-    //            .addPhone(PresonOuterClass.Preson.PhoneNumber.newBuilder()
-    //                    .setNumber("555-4321")
-    //                    .setType(PresonOuterClass.Preson.PhoneType.HOME)
-    //            )
-    //            .build();
-    //
-    //    println(john)
-    //    val toByteArray: Array[Byte] = john.toByteArray
-    //    val seq: Seq[Array[Byte]] = Seq(toByteArray, toByteArray)
+    expr("")
   }
   
   
