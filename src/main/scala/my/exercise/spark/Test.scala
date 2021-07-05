@@ -26,7 +26,7 @@ object Test {
             .appName("spark_test")
             .getOrCreate()
     import spark.implicits._
-    val seq: Seq[(String, Int, String)] = Seq(("a", 1, "小明"), ("b", 2, "小张"))
+    val seq: Seq[(String, Int, String)] = Seq(("a", 1, "小明"), ("b", 2, "小张"), (null, 3, "小红"))
     val df: DataFrame = seq.toDF()
 //    df.show(false)
 //    df.select(expr("*"), lit(1).as("One")).show(false)
@@ -47,28 +47,35 @@ object Test {
 //    df.sortWithinPartitions("")
 //    df.select(lit(4) === "")
 //    val it = df.toLocalIterator()
-    df.where("_2 = 1").show(false)
-    df.where("_2 <> 1").show(false)
-    df.describe().show(false)
+//    df.where("_2 = 1").show(false)
+//    df.where("_2 <> 1").show(false)
+//    df.describe().show(false)
 //    val D = col("") === ""
 //    df.withColumn("", (col("") === "").and(D))
 //    df.select(pow(col(""), 2))
 //    df.stat.corr("", "")
 //    df.select(corr("", ""))
 //    df.stat.approxQuantile("", )
-    df.stat.crosstab("", "")
-    initcap(col(""))
-    regexp_replace(col(""), "", "")
-    translate(col(""), "", "")
-    instr(col(""), "")
-    regexp_extract(col(""), "", 9)
-    lpad(col(""), 9, "")
-    df.select(initcap(col("")))
-    
-    df.stat
-    
-    
-    expr("")
+//    df.stat.crosstab("", "")
+//    initcap(col(""))
+//    regexp_replace(col(""), "", "")
+//    translate(col(""), "", "")
+//    instr(col(""), "")
+//    regexp_extract(col(""), "", 9)
+//    lpad(col(""), 9, "")
+//    df.select(initcap(col("")))
+//    df.stat
+//    expr("")
+    df.select(coalesce(col("_1"), lit(null), lit("hahaah"))).show(false)
+    df.schema.printTreeString()
+    df.na.drop("")
+    df.na.fill("")
+    df.na.replace("", Map())
+    df.select(struct())
+    size(col(""))
+    explode(col(""))
+    explode_outer(col(""))
+    array_contains(col(""), "")
   }
   
   
