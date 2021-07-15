@@ -32,25 +32,25 @@
     <runtime-env>test</runtime-env>
   </properties>
   
-    <dependencies>
-      <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-core_${scala.compile.version}</artifactId>
-        <version>${spark.version}</version>
-      </dependency>
-  
-      <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-sql_${scala.compile.version}</artifactId>
-        <version>${spark.version}</version>
-      </dependency>
-  
-      <dependency>
-        <groupId>com.google.protobuf</groupId>
-        <artifactId>protobuf-java</artifactId>
-        <version>3.15.1</version>
-      </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_${scala.compile.version}</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-sql_${scala.compile.version}</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>3.15.1</version>
+    </dependency>
+  </dependencies>
   
   <build>
     <plugins>
