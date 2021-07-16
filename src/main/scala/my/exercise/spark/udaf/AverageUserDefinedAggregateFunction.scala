@@ -1,8 +1,8 @@
-package my.exercise.spark
+package my.exercise.spark.udaf
 
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
-import org.apache.spark.sql.types.{DataType, DoubleType, LongType, StructField, StructType}
+import org.apache.spark.sql.types._
 
 /**
   * 计算平均值的UDAF样例
