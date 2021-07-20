@@ -1,6 +1,7 @@
 package my.exercise.spark.join
 
 import org.apache.spark.sql.{Column, DataFrame, SparkSession}
+import org.apache.spark.sql.functions._
 
 /**
   * ${description}
@@ -25,7 +26,7 @@ object JoinDemo {
       (0, "Masters", "School of Information", "UC Berkeley"),
       (2, "Master,", "EECS", "UC Berkeley"),
       (1, "Ph.D.", "EECS", "UC Berkeley")
-    ).toDF("id", "degree", "department", "school")
+    ).toDF("i d", "degree", "department", "school")
     
     val sparkStaus: DataFrame = Seq(
       (500, "Vice President"),
@@ -43,5 +44,15 @@ object JoinDemo {
     
     // Seq()必须是左右表都存在的字段
     person.join(graduateProgram, Seq("graduate_program", "id")).show(false)
+    
+    // 对复杂类型的连接操作
+    person.withColumnRenamed("id", "personId")
+            .join(sparkStaus, expr("array_contains(spark_status, id)"))
+            .show(false)
+    
+    // 显示指定broadcast join
+    val joinExpr = person.col("graduate_program") === graduateProgram.col("id")
+    person.join(broadcast(graduateProgram), joinExpr).explain(true)
+    
   }
 }

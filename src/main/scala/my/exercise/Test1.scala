@@ -40,6 +40,8 @@ object Test {
     println(b)
     println(c)
     
+    println(19/2)
+    
   }
 }
 

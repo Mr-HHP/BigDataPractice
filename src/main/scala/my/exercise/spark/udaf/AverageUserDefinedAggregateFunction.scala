@@ -4,6 +4,8 @@ import org.apache.spark.sql.Row
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
 import org.apache.spark.sql.types._
 
+import scala.collection.mutable
+
 /**
   * 计算平均值的UDAF样例
   *

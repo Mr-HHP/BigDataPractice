@@ -163,6 +163,12 @@ object Test {
     df.groupBy(col("")).pivot(col("")).sum("")
     df.groupBy(col("")).pivot(col(""), Seq()).sum("")
     
+    val data = spark.sparkContext.textFile("").flatMap(x => x.split("")).map(x => x.toInt)
+    val mappeddata = data.map(x => (x/4, x)).sortByKey()
+    val m = mappeddata.filter(x => x._1 == 1)
+    val t = m.takeOrdered(1)
+    val result =mappeddata.filter(x => x._1 == 1).takeOrdered(1)
+    result(0)._2
     
     
     
