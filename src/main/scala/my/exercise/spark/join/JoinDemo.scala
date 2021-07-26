@@ -26,7 +26,7 @@ object JoinDemo {
       (0, "Masters", "School of Information", "UC Berkeley"),
       (2, "Master,", "EECS", "UC Berkeley"),
       (1, "Ph.D.", "EECS", "UC Berkeley")
-    ).toDF("i d", "degree", "department", "school")
+    ).toDF("id", "degree", "department", "school")
     
     val sparkStaus: DataFrame = Seq(
       (500, "Vice President"),
