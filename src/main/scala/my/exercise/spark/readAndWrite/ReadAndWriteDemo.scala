@@ -62,5 +62,12 @@ object ReadAndWriteDemo {
     csvFile.write.mode("overwrite").jdbc(newPath, "tableName", props)
     csvFile.write.mode("append").jdbc(newPath, "tableName", props)
     
+    
+    // ##### text read and write #####
+    spark.read.textFile("")
+    spark.read.text("")
+    
+    
+    
   }
 }

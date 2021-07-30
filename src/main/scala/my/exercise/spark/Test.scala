@@ -3,7 +3,6 @@ package my.exercise.spark
 import java.sql.{DriverManager, ResultSet}
 
 import my.protobuf_test.PresonOuterClass
-import org.apache.hadoop.fs.ozone.OzoneFileSystem
 import org.apache.spark.HashPartitioner
 import org.apache.spark.rdd.{JdbcRDD, RDD}
 import org.apache.spark.sql.expressions.{UserDefinedFunction, Window, WindowSpec}
