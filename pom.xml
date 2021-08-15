@@ -33,6 +33,23 @@
   </properties>
   
   <dependencies>
+  
+    <!-- https://mvnrepository.com/artifact/org.roaringbitmap/RoaringBitmap -->
+    <dependency>
+      <groupId>org.roaringbitmap</groupId>
+      <artifactId>RoaringBitmap</artifactId>
+      <version>0.9.15</version>
+    </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.kafka</groupId>-->
+<!--      <artifactId>kafka_2.9.2</artifactId>-->
+<!--      <version>0.8.1.1</version>-->
+<!--    </dependency>-->
+  
+  
+  
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-common</artifactId>

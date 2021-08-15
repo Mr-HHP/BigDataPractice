@@ -27,8 +27,8 @@ object Test {
             .appName("spark_test")
             .getOrCreate()
     import spark.implicits._
-    val seq: Seq[(String, Int, String)] = Seq(("a", 1, "a"), ("b", 2, "b"), ("c", 3, "c"), ("d", 1, "d"))
-    val df: DataFrame = seq.toDF()
+    val seq: Seq[(String, Int, String)] = Seq(("a", 1, null), ("b", 2, null), ("c", 3, "c"), ("d", 1, "d"))
+    val df: DataFrame = seq.toDF("1", "2", "3")
     //    df.show(false)
     //    df.select(expr("*"), lit(1).as("One")).show(false)
     //    df.withColumn("id", expr("_1")).show(false)
@@ -56,7 +56,7 @@ object Test {
     //    df.select(pow(col(""), 2))
     //    df.stat.corr("", "")
     //    df.select(corr("", ""))
-//        df.stat.approxQuantile("", Array[Double](), 7)
+    //        df.stat.approxQuantile("", Array[Double](), 7)
     //    df.stat.crosstab("", "")
     //    initcap(col(""))
     //    regexp_replace(col(""), "", "")
@@ -103,7 +103,7 @@ object Test {
     //    df.select(count(col("")))
     //    df.select(countDistinct(col("")))
     //    df.select(approx_count_distinct(col("")))
-//        approx_count_distinct(col(""), 0.9)
+    //        approx_count_distinct(col(""), 0.9)
     //
     //    df.select(first(col("")), last(col("")))
     
@@ -120,54 +120,58 @@ object Test {
     //    df.groupBy().agg(map)
     
     // spark streaming流式处理所使用的时间窗口
-//    window(col(""), "")
-//
-//    val windowSpec: WindowSpec = Window.partitionBy(col(""))
-//            .orderBy(col(""))
-//            .rowsBetween(Window.unboundedPreceding, Window.currentRow)
-//
-//    val denseRank: Column = dense_rank().over(windowSpec)
-//    val rank1: Column = rank().over(windowSpec)
-//    val maxNum: Column = max(col("")).over(windowSpec)
-//    df.select(
-//      col(""),
-//      col(""),
-//      denseRank.alias("denseRank"),
-//      rank1.alias("rank"),
-//      maxNum.alias("maxNum")).show()
+    //    window(col(""), "")
+    //
+    //    val windowSpec: WindowSpec = Window.partitionBy(col(""))
+    //            .orderBy(col(""))
+    //            .rowsBetween(Window.unboundedPreceding, Window.currentRow)
+    //
+    //    val denseRank: Column = dense_rank().over(windowSpec)
+    //    val rank1: Column = rank().over(windowSpec)
+    //    val maxNum: Column = max(col("")).over(windowSpec)
+    //    df.select(
+    //      col(""),
+    //      col(""),
+    //      denseRank.alias("denseRank"),
+    //      rank1.alias("rank"),
+    //      maxNum.alias("maxNum")).show()
     
     // 删除列，无参的drop不做任何操作
-//    df.drop().show(false)
-//    df.drop(col("_1")).show(false)
-//    // 删除行
-//    df.na.drop().show(false)
-//
-//    df.cube(col(""))
-//                    .agg(sum(col("")))
-//                    .select()
-//                    .orderBy()
-//                    .show(false)
-//
-//    df.rollup(col(""))
-//            .agg(sum(""))
-//            .select()
-//            .orderBy(col(""))
-//            .show(false)
+    //    df.drop().show(false)
+    //    df.drop(col("_1")).show(false)
+    //    // 删除行
+    //    df.na.drop().show(false)
+    //
+    //    df.cube(col(""))
+    //                    .agg(sum(col("")))
+    //                    .select()
+    //                    .orderBy()
+    //                    .show(false)
+    //
+    //    df.rollup(col(""))
+    //            .agg(sum(""))
+    //            .select()
+    //            .orderBy(col(""))
+    //            .show(false)
     
-    df.cube(col("_1"), col("_3"))
-            .agg(grouping_id().alias("grouping_id"), sum("_2"))
-            .orderBy(col("grouping_id").asc)
-            .show(false)
+    //    df.cube(col("_1"), col("_3"))
+    //            .agg(grouping_id().alias("grouping_id"), sum("_2"))
+    //            .orderBy(col("grouping_id").asc)
+    //            .show(false)
+    //
+    //    df.groupBy(col("")).pivot(col("")).sum("")
+    //    df.groupBy(col("")).pivot(col(""), Seq()).sum("")
+    //
+    //    val data = spark.sparkContext.textFile("").flatMap(x => x.split("")).map(x => x.toInt)
+    //    val mappeddata = data.map(x => (x/4, x)).sortByKey()
+    //    val m = mappeddata.filter(x => x._1 == 1)
+    //    val t = m.takeOrdered(1)
+    //    val result =mappeddata.filter(x => x._1 == 1).takeOrdered(1)
+    //    result(0)._2
     
-    df.groupBy(col("")).pivot(col("")).sum("")
-    df.groupBy(col("")).pivot(col(""), Seq()).sum("")
-    
-    val data = spark.sparkContext.textFile("").flatMap(x => x.split("")).map(x => x.toInt)
-    val mappeddata = data.map(x => (x/4, x)).sortByKey()
-    val m = mappeddata.filter(x => x._1 == 1)
-    val t = m.takeOrdered(1)
-    val result =mappeddata.filter(x => x._1 == 1).takeOrdered(1)
-    result(0)._2
+    df.withColumn("1", when(col("3").isNull, col("1").toString() + "####" + "hhhhhh").otherwise(col("1"))).show(false)
+    df.withColumn("1", when(col("3").isNull, col("1").toString()).otherwise(col("1"))).show(false)
+    df.withColumn("1", when(col("3").isNull, concat(col("1"), lit("####"), lit("hhhhhhh"))).otherwise(col("1"))).show(false)
     
     
     
