@@ -24,11 +24,26 @@ object MultipleOutDemo {
     val df = seq.toDF("col1", "col2", "col3")
     
     println("df:\t" + df.rdd.getNumPartitions)
+    df.foreachPartition(iterable => {
+      iterable.foreach(println)
+      println("----------------")
+    })
+    println("==================")
     val df1 = df.repartition(3, col("col1"))
     println(df1.rdd.getNumPartitions)
+    df1.foreachPartition(iterable => {
+      iterable.foreach(println)
+      println("----------------")
+    })
+    println("===================")
+    println(df.repartition(col("col1")).rdd.getNumPartitions)
+    df.repartition(col("col1")).foreachPartition(iterable => {
+      iterable.foreach(println)
+      println("----------------")
+    })
     
-    val arrRdd = df.rdd.glom().map(arr => arr.map(row => row.getString(0) + "\t" + row.getString(1) + "\t" + row.getString(2)).mkString(","))
-    arrRdd.foreach(println)
+//    val arrRdd = df.rdd.glom().map(arr => arr.map(row => row.getString(0) + "\t" + row.getString(1) + "\t" + row.getString(2)).mkString(","))
+//    arrRdd.foreach(println)
     
     println("================================")
     
@@ -37,8 +52,8 @@ object MultipleOutDemo {
     
     val path: String =  s"D:\\BigDataProject\\MySpark\\src\\main\\path1\\"
     
-    arrRdd1.map(line => (s"2021\u0001aaa", new Text(line)))
-            .saveAsHadoopFile(path, classOf[BytesWritable], classOf[Text], classOf[MyMultipleOutputFormat])
+//    arrRdd1.map(line => (s"2021\u0001aaa", new Text(line)))
+//            .saveAsHadoopFile(path, classOf[BytesWritable], classOf[Text], classOf[MyMultipleOutputFormat])
     
 //    df1.write.mode(SaveMode.Overwrite)
 //            .partitionBy("col2")

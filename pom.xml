@@ -41,6 +41,12 @@
       <version>0.9.15</version>
     </dependency>
   
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.73</version>
+    </dependency>
+  
     <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
 <!--    <dependency>-->
 <!--      <groupId>org.apache.kafka</groupId>-->
