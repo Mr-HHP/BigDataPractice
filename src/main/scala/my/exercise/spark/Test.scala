@@ -1,7 +1,11 @@
 package my.exercise.spark
 
 
+import java.text.SimpleDateFormat
+import java.util.Calendar
+
 import com.alibaba.fastjson.{JSON, JSONObject}
+
 import scala.collection.JavaConverters._
 
 
@@ -15,11 +19,11 @@ case class L(_1: String, _2: Int)
 
 object Test {
   def main(args: Array[String]): Unit = {
-    val map = Map("sha1" -> "123", "bucket" -> "test", "dimension_type" -> "aaaa", "send_time" -> "1997", "file_name" -> "a.txt", "report_type" -> "daily", "report_date" -> "2001")
-    val jsonObject = new JSONObject()
-    map.foreach(kv => jsonObject.put(kv._1, kv._2))
-    println(jsonObject.toString)
-    println(jsonObject.toJSONString)
+    t("D")
+    t("W")
+    t("M")
+    
+    
   }
   
   def power3(number: Double): Double = number * number * number
@@ -27,10 +31,11 @@ object Test {
   def t(s: String) = s match {
     case "D" | "daily" | "DAILY" =>
       println("D")
-    case "W" | "weekly" | "WEEKLY" =>
-      println("W")
+    case "W" | "weekly" | "WEEKLY" | "M" | "monthly" | "MONTHLY" =>
+      println("######")
     case "M" | "monthly" | "MONTHLY" =>
-      println("M")
+      println("######")
+    case _ => println("other")
   }
   
 }
