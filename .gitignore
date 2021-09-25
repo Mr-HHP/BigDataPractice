@@ -24,3 +24,5 @@ atlassian-ide-plugin.xml
 out/
 *.ipr
 *.iws
+data/*
+data
