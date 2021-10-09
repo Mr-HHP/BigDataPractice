@@ -2,11 +2,16 @@ package my.exercise.spark.other
 
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream, DataInputStream, DataOutputStream}
 
+import com.alibaba.fastjson.JSON
+import com.alibaba.fastjson.serializer.SerializeFilter
+import com.fasterxml.jackson.databind.ObjectMapper
+import my.other.Student
 import org.apache.hadoop.fs.{FileStatus, FileSystem, Path}
-import org.apache.spark.sql.{SaveMode, SparkSession}
+import org.apache.spark.sql.{Row, SaveMode, SparkSession}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.BinaryType
 import org.roaringbitmap.RoaringBitmap
+import scala.collection.JavaConverters._
 
 /**
   * ${description}
@@ -16,27 +21,33 @@ import org.roaringbitmap.RoaringBitmap
   **/
 object OtherTest {
   def main(args: Array[String]): Unit = {
-    val spark: SparkSession = SparkSession
-            .builder()
-            .appName("test")
-            .master("local[*]")
-            .getOrCreate()
-    import spark.implicits._
-    println("202108*".substring(0, "202108*".length - 1))
+    val s1 = new Student("李明", 1, 18)
+    val objectMapper = new ObjectMapper()
+    println(objectMapper.writeValueAsString(s1))
+    val emptyFilters: Array[SerializeFilter] = Array.empty
+    println(JSON.toJSONString(s1, emptyFilters))
     
-    val seq = Seq(
-      ("a", "a", "a"),
-      ("a", "a", "b"),
-      ("a", "a", "d"),
-      ("a", "a", "a"),
-      ("c", "c", "c,c"),
-      ("b", "b", "b"),
-      ("b", "b", "b"),
-      ("b", "b", "b123"),
-      ("b", "b", "b")
-    )
-    val seq1 = Seq(("b", "1", "2"))
-//    val df = seq.toDF("col_1", "col_2", "col_3")
+//    val spark: SparkSession = SparkSession
+//            .builder()
+//            .appName("test")
+//            .master("local[*]")
+//            .enableHiveSupport()
+//            .config("hive.exec.dynamici.partition", value = true)
+//            .config("hive.exec.dynamic.partition.mode", "nonstrict")
+//            .getOrCreate()
+//    import spark.implicits._
+//    println("202108*".substring(0, "202108*".length - 1))
+//
+//    val seq = Seq(("a", "20210901", "act", "hmt_aaa"))
+//    val seq1 = Seq(("b", "1", "2"))
+//    val df = seq.toDF("id", "date", "type", "ua")
+//    println(df.schema)
+//    println(df.groupBy("ua").count().schema)
+//    println(df.groupBy("ua").agg(countDistinct("ua")).schema)
+    
+//    df.show(false)
+//    df.foreach((row: Row) => println(row.getAs[String](0)))
+//    df.write.partitionBy("date", "type", "ua").mode(SaveMode.Append).format("hive").saveAsTable("saas_prds_hma_dw.test")
 //    val dff = df.join(seq1.toDF("col_a", "col_2", "col_3"), col("col_1") === col("col_a"))
 //    dff.show(false)
 //    dff.map(row => {

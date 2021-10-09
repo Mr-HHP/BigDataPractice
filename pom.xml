@@ -61,7 +61,29 @@
       <artifactId>hadoop-common</artifactId>
       <version>2.6.0</version>
     </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/graphframes/graphframes -->
+    <!-- spark构建图第三方依赖 -->
+    <dependency>
+      <groupId>graphframes</groupId>
+      <artifactId>graphframes</artifactId>
+      <version>0.8.1-spark2.4-s_2.11</version>
+      <scope>system</scope>
+      <systemPath>D:/maven/repo/org/graphframe/graphframes-0.8.1-spark2.4-s_2.11.jar</systemPath>
+    </dependency>
     
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-graphx_${scala.compile.version}</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-hive_${scala.compile.version}</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+  
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_${scala.compile.version}</artifactId>
@@ -78,6 +100,30 @@
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
       <version>3.15.1</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.73</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.12.3</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.12.3</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.12.3</version>
     </dependency>
   </dependencies>
   
