@@ -4,7 +4,6 @@ import java.io.{ByteArrayInputStream, ByteArrayOutputStream, DataInputStream, Da
 
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.serializer.SerializeFilter
-import com.fasterxml.jackson.databind.ObjectMapper
 import my.other.Student
 import org.apache.hadoop.fs.{FileStatus, FileSystem, Path}
 import org.apache.spark.sql.{Row, SaveMode, SparkSession}
@@ -22,8 +21,8 @@ import scala.collection.JavaConverters._
 object OtherTest {
   def main(args: Array[String]): Unit = {
     val s1 = new Student("李明", 1, 18)
-    val objectMapper = new ObjectMapper()
-    println(objectMapper.writeValueAsString(s1))
+//    val objectMapper = new ObjectMapper()
+//    println(objectMapper.writeValueAsString(s1))
     val emptyFilters: Array[SerializeFilter] = Array.empty
     println(JSON.toJSONString(s1, emptyFilters))
     
