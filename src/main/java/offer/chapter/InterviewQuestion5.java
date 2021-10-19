@@ -1,4 +1,4 @@
-package offer.chapter.five;
+package offer.chapter;
 
 /**
  * 面试题5
@@ -10,7 +10,7 @@ package offer.chapter.five;
  * @author Mr.黄
  * @date 2021/10/16
  **/
-public class InterviewQuestionFive {
+public class InterviewQuestion5 {
   public static void main(String[] args) {
   
   }

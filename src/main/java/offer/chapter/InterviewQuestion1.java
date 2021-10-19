@@ -1,4 +1,4 @@
-package offer.chapter.one;
+package offer.chapter;
 
 /**
  * 面试题1
@@ -10,7 +10,7 @@ package offer.chapter.one;
  * @author Mr.黄
  * @date 2021/10/10
  **/
-public class InterviewQuestionOne {
+public class InterviewQuestion1 {
   
   /**
    * 进行减法操作的前提操作

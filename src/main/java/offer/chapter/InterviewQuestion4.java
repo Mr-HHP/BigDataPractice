@@ -1,4 +1,4 @@
-package offer.chapter.four;
+package offer.chapter;
 
 /**
  * 面试题4
@@ -10,7 +10,7 @@ package offer.chapter.four;
  * @author Mr.黄
  * @date 2021/10/16
  **/
-public class InterviewQuestionFour {
+public class InterviewQuestion4 {
   public static int singleNumber(int[] nums) {
     // 保存数组nums中所有整数的二进制形式中第i个数位之和
     int[] bitSums = new int[32];

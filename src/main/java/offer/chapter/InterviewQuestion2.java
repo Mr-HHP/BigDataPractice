@@ -1,4 +1,4 @@
-package offer.chapter.two;
+package offer.chapter;
 
 /**
  * 面试题2
@@ -9,7 +9,7 @@ package offer.chapter.two;
  * @author Mr.黄
  * @date 2021/10/12
  **/
-public class InterviewQuestionTwo {
+public class InterviewQuestion2 {
   public static String addBinary(String a, String b) {
     StringBuilder result = new StringBuilder();
     // 获取char数组下标，从后往前，并且可以判断参与计算的数据准确性

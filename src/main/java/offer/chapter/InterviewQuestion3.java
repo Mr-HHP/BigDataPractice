@@ -1,4 +1,4 @@
-package offer.chapter.three;
+package offer.chapter;
 
 /**
  * 面试题3
@@ -9,7 +9,7 @@ package offer.chapter.three;
  * @author Mr.黄
  * @date 2021/10/13
  **/
-public class InterviewQuestionThree {
+public class InterviewQuestion3 {
   /**
    * 通过 i & (i - 1)计算i的二进制形式中1的个数
    * 时间复杂度O(nk)
