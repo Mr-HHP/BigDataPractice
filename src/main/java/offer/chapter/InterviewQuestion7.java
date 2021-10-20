@@ -18,6 +18,17 @@ public class InterviewQuestion7 {
     System.out.println(threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
   }
   
+  /**
+   * 依然适用双指针方法。
+   * 先对无序数组排序，再使用双指针方法查找
+   * 注意：需要排除已经查找到了的数据，要进行去重操作
+   *
+   * 时间复杂度：O(nlngn) + O(n2) => O(n2)
+   * 空间复杂度：O(1)
+   *
+   * @param nums
+   * @return
+   */
   public static List<List<Integer>> threeSum(int[] nums) {
     List<List<Integer>> result = new LinkedList<List<Integer>>();
     if (nums.length >= 3) {
