@@ -1,4 +1,4 @@
-package offer.chapter;
+package offer.chapter2;
 
 import java.util.Arrays;
 

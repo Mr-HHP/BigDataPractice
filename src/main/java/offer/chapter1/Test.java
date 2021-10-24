@@ -1,4 +1,4 @@
-package offer.chapter;
+package offer.chapter1;
 
 import my.other.Student;
 

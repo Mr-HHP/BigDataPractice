@@ -10,11 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  **/
 public class StudentTest {
   public static void main(String[] args) throws JsonProcessingException {
-    Student student = new Student("李明", 1, 18);
-    ObjectMapper objectMapper = new ObjectMapper();
-    String writeValueAsString = objectMapper.writeValueAsString(student);
-    String toJSONString = JSON.toJSONString(student);
-    System.out.println(writeValueAsString);
-    System.out.println(toJSONString);
+//    Student student = new Student("李明", 1, 18);
+//    student.test();
+    System.out.println(System.currentTimeMillis());
   }
 }

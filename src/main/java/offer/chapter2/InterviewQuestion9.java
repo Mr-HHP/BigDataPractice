@@ -1,4 +1,4 @@
-package offer.chapter;
+package offer.chapter2;
 
 /**
  * 面试题9

@@ -9,6 +9,10 @@ public class Student {
   private int id;
   private int age;
   
+  public void test() {
+    System.out.println(this.name + this.id + this.age);
+  }
+  
   public Student() {
   }
   
