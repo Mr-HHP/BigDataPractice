@@ -16,7 +16,7 @@ package offer.chapter3;
  * @author Mr.黄
  * @date 2021/10/27
  **/
-public class interviewQuestion14 {
+public class InterviewQuestion14 {
   /**
    * 使用双指针法。
    * 基于双指针和哈希表进行解题

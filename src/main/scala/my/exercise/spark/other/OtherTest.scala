@@ -16,13 +16,13 @@ object OtherTest {
     import spark.implicits._
     val ds: Dataset[A] = seq.toDS()
     val df1 = ds
-    val df2 = df1.where("id=100").as[A]
-    val df3 = df1.where("id=200").as[A]
+    val df2 = df1.filter(a => "100".equals(a.id)).map(a => A(a.id, a.name, a.info, a.b))
+    val df3 = df2.filter(a => "100".equals(a.id)).map(a => A(a.id, a.name, a.info, a.b))
     df1.show(false)
     df2.show(false)
     df3.show(false)
     
-    val df4 = df2.union(df3).union(df1)
+    val df4 = df2.union(df3).union(df1).toDF()
     df4.show(false)
     
   }
