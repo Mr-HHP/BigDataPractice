@@ -1,13 +1,10 @@
 package offer.chapter3;
 
-import sun.applet.Main;
-
-import javax.sound.midi.Soundbank;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 面试题15
+ * 面试题15：字符串中的所有变位词
  *
  * 输入字符串s1和s2，如何找出字符串s2的所有变位词在字符串s1中的起始下标？
  * 假设两个字符串中只包含英文小写字母
