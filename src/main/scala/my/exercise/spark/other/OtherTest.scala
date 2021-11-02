@@ -1,13 +1,11 @@
 package my.exercise.spark.other
 
-import java.util
-
 import org.apache.hadoop.fs.{FileStatus, FileSystem, Path}
-import org.apache.spark.sql.{Dataset, SparkSession}
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.Map
-import scala.collection.JavaConverters._
 
 /**
   * ${description}
@@ -20,25 +18,9 @@ object OtherTest {
   
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder().master("local[*]").getOrCreate()
-    val seq: Seq[A] = Seq(A("i", "j", Map("a" -> "a"), B("i", "j")), A("i", "j", Map("a" -> "a"), B("i", "j")))
     import spark.implicits._
-    val ds: Dataset[A] = seq.toDS()
-    val df1 = ds
-    val df2 = df1.filter(a => "100".equals(a.id)).map(a => A(a.id, a.name, a.info, a.b))
-    val df3 = df2.filter(a => "100".equals(a.id)).map(a => A(a.id, a.name, a.info, a.b))
-    
-    val list = new util.ArrayList[String]()
-    val map = spark.sparkContext.broadcast(Map("i" -> list.asScala.toSeq, "j" -> list.asScala.toSeq))
-    println("map: \t" + map.value)
-    df1.show(false)
-    val df4 = df1.map((a: A) => {
-      val seq: Seq[String] = map.value.getOrElse(a.id, Seq(a.id))
-      println(seq + "\t" + seq.size)
-      seq.map((s: String) => A(s, a.name, a.info, a.b))
-    }).flatMap((seq: Seq[A]) => seq)
-    
-    df4.schema.printTreeString()
-    df4.show(false)
+    val seq = Seq(("a", "A", "i"), ("a", "A", "i"), ("b", "b", "i"))
+    seq.toDF("i", "j", "k").groupBy(col("i"), col("j")).count().show(false)
     
   }
   
