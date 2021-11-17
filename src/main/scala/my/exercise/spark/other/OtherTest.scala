@@ -3,7 +3,7 @@ package my.exercise.spark.other
 import java.util.regex.Pattern
 
 import org.apache.hadoop.fs.{FileStatus, FileSystem, Path}
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 import org.slf4j.{Logger, LoggerFactory}
 
@@ -19,21 +19,15 @@ object OtherTest {
   private val logger: Logger = LoggerFactory.getLogger(this.getClass)
   
   def main(args: Array[String]): Unit = {
-//    val spark: SparkSession = SparkSession.builder().master("local[*]").getOrCreate()
-//    import spark.implicits._
-//    val seq = Seq(("a", "A", "i"), ("a", "A", "i"), ("b", "b", "i"))
-//    seq.toDF("i", "j", "k").groupBy(col("i"), col("j")).count().show(false)
-    val pattern = s".*file.*NetworkUitlity\\.java.*"
-    val s = "fileNetworkUitlity.java"
-    val s1 = "123dffileasdfNetworkUitlity.javaeer"
-    val s2 = "adffile%3A+NetworkUitlity.java%3A"
-    val s3 = "fdddfile%3A+NetworkUitlity.java%3A"
-    val map = Map("s" -> s, "s1" -> s1, "s2" -> s2, "s3" -> s3)
-    println(Pattern.matches(pattern, map.getOrElse("s", "other")))
-    println(Pattern.matches(pattern, map.getOrElse("s1", "other")))
-    println(Pattern.matches(pattern, map.getOrElse("s2", "other")))
-    println(Pattern.matches(pattern, map.getOrElse("s3", "other")))
-    println(Pattern.matches(pattern, map.getOrElse("a", "other")))
+    val spark: SparkSession = SparkSession.builder().master("local[*]").getOrCreate()
+    import spark.implicits._
+    val seq = Seq(("a", "a", "a"), ("a", "a", "a"), ("b", "b", "b"), ("a", "a", "c"), ("c", "c", "c"), ("b", "b", "b"), ("b", "b", "b"), ("d", "d", "d"))
+    val df: DataFrame = seq.toDF("i", "j", "k")
+//    df.cube("i", "j", "k").count().show(false)
+//    df.cube("i", "j", "k").agg(grouping("i")).show(false)
+    df.cube("i", "j", "k")
+      .agg(count("i"), countDistinct("i", "j", "k"), sum("i"))
+      .show(false)
     
   }
   

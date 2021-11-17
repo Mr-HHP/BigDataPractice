@@ -12,6 +12,9 @@ public class InterviewQuestion24 {
   /**
    * 相当于使用三个变量互换位置，以此来实现链表反转
    *
+   * 时间复杂度：O(n)
+   * 空间复杂度：O(1)
+   *
    * @param head 给定单向链表
    * @return 反转后的单向链表的头节点
    */
