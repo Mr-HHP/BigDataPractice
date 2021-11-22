@@ -1,5 +1,7 @@
 package my.exercise.spark.other
 
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.regex.Pattern
 
 import org.apache.hadoop.fs.{FileStatus, FileSystem, Path}
@@ -21,14 +23,12 @@ object OtherTest {
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder().master("local[*]").getOrCreate()
     import spark.implicits._
-    val seq = Seq(("a", "a", "a"), ("a", "a", "a"), ("b", "b", "b"), ("a", "a", "c"), ("c", "c", "c"), ("b", "b", "b"), ("b", "b", "b"), ("d", "d", "d"))
-    val df: DataFrame = seq.toDF("i", "j", "k")
-//    df.cube("i", "j", "k").count().show(false)
-//    df.cube("i", "j", "k").agg(grouping("i")).show(false)
-    df.cube("i", "j", "k")
-      .agg(count("i"), countDistinct("i", "j", "k"), sum("i"))
-      .show(false)
-    
+    val seq1: Seq[(String, String, String)] = Seq(("a", "a", "a"), ("b", "b", "b"), ("c", "c", "c"))
+    val seq2: Seq[(String, String, String)] = Seq(("a", "a", "a"), ("b", "b", "b"), ("c", "c", "c"), ("d", "d", "d"))
+    val df1: DataFrame = seq1.toDF("i1", "j1", "k1")
+    val df2: DataFrame = seq2.toDF("i2", "j2", "k2")
+    val c = col("") === col("")
+    df1.join(df2, lit(col("i1") === col("i2")).and(col("j1") === col("j2")).and(col("k1") === col("k2")), "full").show(false)
   }
   
   def csvDownloadLocal(fs: FileSystem, hdfsPath: String, localPath: String): Unit = {
@@ -39,6 +39,20 @@ object OtherTest {
         fs.copyToLocalFile(fileStatus.getPath, new Path(s"$localPath/$fileName"))
       case _ =>
     })
+  }
+  
+  def getPreviousDate(time: String): String = time match {
+    case amount if amount.contains("-") || "0".equals(amount) =>
+      val calendar: Calendar = Calendar.getInstance()
+      calendar.add(Calendar.DATE, amount.toInt - 1)
+      new SimpleDateFormat("yyyyMMdd").format(calendar.getTime)
+    case other => {
+      val d = new SimpleDateFormat("yyyyMMdd").parse(time)
+      val calendar: Calendar = Calendar.getInstance()
+      calendar.setTime(d)
+      calendar.add(Calendar.DATE, -1)
+      new SimpleDateFormat("yyyyMMdd").format(calendar.getTime)
+    }
   }
 }
 
