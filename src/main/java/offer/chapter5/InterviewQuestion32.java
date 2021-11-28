@@ -45,6 +45,9 @@ public class InterviewQuestion32 {
   /**
    * 如果考虑非英文字母，使用真正的HashMap来进行操作
    *
+   * 时间复杂度：O(n)
+   * 空间复杂度：O(n)
+   *
    * @param str1 字符串str1
    * @param str2 字符串str2
    * @return str1和str2互为变位词返回true，否则返回false
