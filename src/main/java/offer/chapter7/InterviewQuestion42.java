@@ -5,7 +5,7 @@ import java.util.Queue;
 
 /**
  * 面试题42：最近请求次数
- *
+ * <p>
  * 请实现如下类型RecentCounter，它是统计过去3000ms内的请求次数的计数器。
  * 该类型的构造函数RecentCounter初始化计数器，请求数初始化为0；
  * 函数ping(int t)在时间t添加一个请求（t表示以毫秒为单位的时间），
@@ -23,9 +23,13 @@ public class InterviewQuestion42 {
  * 解法：使用队列进行存储请求记录
  */
 class RecentCounter {
-  // 存储请求发生的记录队列
+  /**
+   * 存储请求发生的记录队列
+   */
   private Queue<Integer> times;
-  // 滑动窗口
+  /**
+   * 滑动窗口
+   */
   private int windowSize;
   
   /**
