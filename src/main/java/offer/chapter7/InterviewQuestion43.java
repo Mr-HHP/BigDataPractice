@@ -17,12 +17,17 @@ import java.util.Queue;
 public class InterviewQuestion43 {
 }
 
+/**
+ * 空间复杂度：O(n)
+ */
 class CBTInserter {
   private Queue<TreeNode> queue;
   private TreeNode root;
   
   /**
    * 构造函数
+   *
+   * 时间复杂度：O(n)
    *
    * @param root 完全二叉树根节点
    */
@@ -40,6 +45,8 @@ class CBTInserter {
   
   /**
    * insert方法
+   *
+   * 时间复杂度：O(1)
    *
    * @param v 待插入的值
    * @return 被插入节点的父节点
@@ -66,6 +73,8 @@ class CBTInserter {
   
   /**
    * 获取完全二叉树的根节点
+   *
+   * 时间复杂度：O(1)
    *
    * @return 完全二叉树的根节点
    */
