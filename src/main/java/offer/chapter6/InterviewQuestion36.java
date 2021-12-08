@@ -20,6 +20,9 @@ public class InterviewQuestion36 {
   /**
    * 后缀表达式。利用栈来解题
    *
+   * 时间复杂度：O(n)
+   * 空间复杂度：O(n)
+   *
    * @param tokens 字符串数组形式的后缀表达式
    * @return 后缀表达式的计算结果
    */
