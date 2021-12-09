@@ -23,12 +23,23 @@ object OtherTest {
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder().master("local[*]").getOrCreate()
     import spark.implicits._
-    val seq1: Seq[(String, String, String)] = Seq(("a", "a", "a"), ("b", "b", "b"), ("c", "c", "c"))
+    val seq1: Seq[(String, String, String)] = Seq(("aa", "a", "a"), ("b", "b", "b"), ("c", "c", "c"))
     val seq2: Seq[(String, String, String)] = Seq(("a", "a", "a"), ("b", "b", "b"), ("c", "c", "c"), ("d", "d", "d"))
     val df1: DataFrame = seq1.toDF("i1", "j1", "k1")
     val df2: DataFrame = seq2.toDF("i2", "j2", "k2")
-    val c = col("") === col("")
-    df1.join(df2, lit(col("i1") === col("i2")).and(col("j1") === col("j2")).and(col("k1") === col("k2")), "full").show(false)
+    df1.show(false)
+    println("1")
+    df1.filter(lit(!col("i1").equals(lit("aa")))).show(false)
+    println("2")
+    df1.filter(col("i1") =!= "aa").show(false)
+    println("3")
+    df1.filter(col("i1").notEqual("aa")).show(false)
+    println("4")
+    df1.filter(col("i1").notEqual(lit("aa"))).show(false)
+    println("5")
+    df1.filter(!col("i1").equalTo("aa")).show(false)
+//    val c = col("") === col("")
+//    df1.join(df2, lit(col("i1") === col("i2")).and(col("j1") === col("j2")).and(col("k1") === col("k2")), "full").show(false)
   }
   
   def csvDownloadLocal(fs: FileSystem, hdfsPath: String, localPath: String): Unit = {
