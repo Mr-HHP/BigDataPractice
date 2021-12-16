@@ -21,7 +21,7 @@ public class TreeNode {
   
   /**
    * 递归实现二叉树的中序遍历
-   *
+   * <p>
    * 二叉树中序遍历：左根右
    *
    * @param root 根节点
@@ -36,7 +36,7 @@ public class TreeNode {
   /**
    * 递归实现二叉树中序遍历核心逻辑代码
    *
-   * @param root 根节点
+   * @param root  根节点
    * @param nodes 节点集合
    */
   private void dfs(TreeNode root, List<Integer> nodes) {
@@ -48,7 +48,7 @@ public class TreeNode {
   /**
    * 迭代实现二叉树的中序遍历
    * 使用辅助栈
-   *
+   * <p>
    * 二叉树中序遍历：左根右
    *
    * @param root 根节点
@@ -68,6 +68,34 @@ public class TreeNode {
       cur = cur.right;
     }
     return nodes;
+  }
+  
+  /**
+   * 递归实现二叉树的前序遍历
+   *
+   * 二叉树前序遍历：根左右
+   *
+   * @param root 根节点
+   * @return 前序遍历的值
+   */
+  public List<Integer> preorderTraversal(TreeNode root) {
+    List<Integer> nodes = new LinkedList<>();
+    dfs2(root, nodes);
+    return nodes;
+  }
+  
+  /**
+   * 二叉树前序遍历递归核心代码
+   *
+   * @param root 根节点
+   * @param nodes 节点集合
+   */
+  private void dfs2(TreeNode root, List<Integer> nodes) {
+    if (root != null) {
+      nodes.add(root.val);
+      dfs2(root.left, nodes);
+      dfs2(root.right, nodes);
+    }
   }
   
 }
