@@ -1,5 +1,7 @@
 package offer.chapter8;
 
+import scala.Int;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -78,7 +80,7 @@ public class TreeNode {
    * @param root 根节点
    * @return 前序遍历的值
    */
-  public List<Integer> preorderTraversal(TreeNode root) {
+  public List<Integer> preorderTraversalRecursion(TreeNode root) {
     List<Integer> nodes = new LinkedList<>();
     dfs2(root, nodes);
     return nodes;
@@ -96,6 +98,32 @@ public class TreeNode {
       dfs2(root.left, nodes);
       dfs2(root.right, nodes);
     }
+  }
+  
+  /**
+   * 二叉树前序遍历迭代实现
+   * 使用栈辅助实现
+   *
+   * @param root 根节点
+   * @return 二叉树前序遍历节点集合
+   */
+  public List<Integer> preorderTraversalIteration(TreeNode root) {
+    List<Integer> result = new LinkedList<>();
+    Stack<TreeNode> stack = new Stack<>();
+    TreeNode cur = root;
+    while (cur != null || !stack.empty()) {
+      while (cur != null) {
+        // 将根节点存入结果
+        result.add(cur.val);
+        stack.push(cur);
+        // 左节点
+        cur = cur.left;
+      }
+      cur = stack.pop();
+      // 右节点
+      cur = cur.right;
+    }
+    return result;
   }
   
 }
