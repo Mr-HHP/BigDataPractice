@@ -18,7 +18,7 @@ import java.util.Stack;
  * @date 2021/12/14
  **/
 public class TreeNode {
-  private int val;
+  int val;
   TreeNode left;
   TreeNode right;
   
