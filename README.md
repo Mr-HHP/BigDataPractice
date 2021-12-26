@@ -1,2 +1,2 @@
-# MySpark
-我的spark练习
+# BigDataPractice
+我的大数据练习
