@@ -5,7 +5,8 @@ import java.util.Calendar
 import java.util.regex.Pattern
 
 import org.apache.hadoop.fs.{FileStatus, FileSystem, Path}
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.rdd.RDD
+import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 import org.apache.spark.sql.functions._
 import org.slf4j.{Logger, LoggerFactory}
 
@@ -22,43 +23,19 @@ object OtherTest {
   private val logger: Logger = LoggerFactory.getLogger(this.getClass)
   
   def main(args: Array[String]): Unit = {
-//    val spark: SparkSession = SparkSession.builder().master("local[*]").getOrCreate()
-//    import spark.implicits._
-//    val seq1: Seq[(String, String, String)] = Seq(("aa", "a", "a"), ("b", "b", "b"), ("c", "c", "c"))
-//    val seq2: Seq[(String, String, String)] = Seq(("a", "a", "a"), ("b", "b", "b"), ("c", "c", "c"), ("d", "d", "d"))
-//    val df1: DataFrame = seq1.toDF("i1", "j1", "k1")
-//    val df2: DataFrame = seq2.toDF("i2", "j2", "k2")
-//    df1.show(false)
-//    println("1")
-//    df1.filter(lit(!col("i1").equals(lit("aa")))).show(false)
-//    println("2")
-//    df1.filter(col("i1") =!= "aa").show(false)
-//    println("3")
-//    df1.filter(col("i1").notEqual("aa")).show(false)
-//    println("4")
-//    df1.filter(col("i1").notEqual(lit("aa"))).show(false)
-//    println("5")
-//    df1.filter(!col("i1").equalTo("aa")).show(false)
-////    val c = col("") === col("")
-////    df1.join(df2, lit(col("i1") === col("i2")).and(col("j1") === col("j2")).and(col("k1") === col("k2")), "full").show(false)
-  
-  
-    val queue = new mutable.Queue[String]()
-    val q = new ListBuffer[mutable.Queue[String]]
-    queue.enqueue("a")
-    queue.enqueue("b")
-    queue.enqueue("c")
-    queue.enqueue("d")
-    queue.enqueue("e")
-    q.append(queue)
-    println(q)
-    queue.clear()
-    println(queue)
-    println(q)
-    //    while (queue.nonEmpty) {
-    //      println(queue.dequeue())
-    //    }
-    //    println(queue)
+    val spark: SparkSession = SparkSession.builder().master("local[*]").getOrCreate()
+    import spark.implicits._
+    val userSeq: Seq[String] = Seq("cust_id01", "cust_id01", "cust_id01")
+    val userDs: Dataset[String] = userSeq.toDF("new_user_id").as[String]
+    val eventSeq: Seq[(String, String)] = Seq(("event","cust_id01"), ("event","cust_id01"), ("event1", "aaa"))
+    val eventDs: Dataset[(String, String)] = eventSeq.toDF("event", "user_id").as[(String, String)]
+    val joinDs: Dataset[(String, String, String)] = eventDs.join(userDs, col("user_id") === col("new_user_id"), "left").as[(String, String, String)]
+    
+    userDs.show(false)
+    eventDs.show(false)
+    println("joinDs count: " + joinDs.count())
+    println("joinDs: ")
+    joinDs.collect().foreach(println)
   }
   
   def csvDownloadLocal(fs: FileSystem, hdfsPath: String, localPath: String): Unit = {

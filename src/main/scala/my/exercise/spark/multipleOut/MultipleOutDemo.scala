@@ -2,7 +2,7 @@ package my.exercise.spark.multipleOut
 
 import org.apache.hadoop.io.compress.SnappyCodec
 import org.apache.hadoop.io.{BytesWritable, NullWritable, Text}
-import org.apache.spark.sql.{SaveMode, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, Row, SaveMode, SparkSession}
 import org.apache.spark.sql.functions.col
 
 /**
@@ -21,26 +21,14 @@ object MultipleOutDemo {
     // ##### spark多输出 #####
     val seq: Seq[(String, String, String)] = Seq(("a", "A", "1"), ("b", "A", "258"), ("a", "C", "3"), ("a", "C", "1"), ("a", "A", "1"), ("d", "D", "4"), ("a", "A", "1"), ("e", "C", "5"), ("a", "A", "1"), ("f", "F", "6"), ("g", "A", "7"), ("h", "H", "8"), ("a", "C", "1"), ("i", "D", "9"), ("a", "A", "1"), ("j", "A", "10"))
     import spark.implicits._
-    val df = seq.toDF("col1", "col2", "col3")
+    val df: DataFrame = seq.toDF("col1", "col2", "col3")
     
     println("df:\t" + df.rdd.getNumPartitions)
-    df.foreachPartition(iterable => {
-      iterable.foreach(println)
-      println("----------------")
-    })
     println("==================")
-    val df1 = df.repartition(3, col("col1"))
+    val df1: Dataset[Row] = df.repartition(3, col("col1"))
     println(df1.rdd.getNumPartitions)
-    df1.foreachPartition(iterable => {
-      iterable.foreach(println)
-      println("----------------")
-    })
     println("===================")
     println(df.repartition(col("col1")).rdd.getNumPartitions)
-    df.repartition(col("col1")).foreachPartition(iterable => {
-      iterable.foreach(println)
-      println("----------------")
-    })
     
 //    val arrRdd = df.rdd.glom().map(arr => arr.map(row => row.getString(0) + "\t" + row.getString(1) + "\t" + row.getString(2)).mkString(","))
 //    arrRdd.foreach(println)

@@ -1,6 +1,6 @@
 package my.exercise.spark.sparkSql
 
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
 
 /**
   * ${description}
@@ -17,7 +17,7 @@ object SparkSqlDemo {
     import spark.implicits._
         val seq: Seq[(String, String, String)] = Seq(("a", "b", "c"), ("1", "2", "3"))
 //    val seq: Seq[String] = Seq("a", "b", "c")
-    val df = seq.toDF("col_1", "col_2", "col_3")
+    val df: DataFrame = seq.toDF("col_1", "col_2", "col_3")
 //    df.explain(true)
 //    println("=========================")
 

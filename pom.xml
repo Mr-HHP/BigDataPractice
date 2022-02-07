@@ -12,24 +12,18 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- language -->
-    <scala.version>2.11.7</scala.version>
-    <scala.compile.version>2.11</scala.compile.version>
-    <java.version>1.8</java.version>
+    <scala.version>2.12.10</scala.version>
+    <scala.compile.version>2.12</scala.compile.version>
     <!-- hadoop -->
-    <spark.version>2.4.0</spark.version>
-    <hadoop.version>3.1.0</hadoop.version>
-    <hbase.version>1.2.0</hbase.version>
-    <!-- spring -->
-    <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
-    <!-- third dependency -->
-    <amqp.version>5.7.3</amqp.version>
-    <aviator-version>4.0.0-RC</aviator-version>
-    <sl4j.version>1.7.30</sl4j.version>
-    <jackson.version>2.6.7</jackson.version>
-    <http.version>4.5.2</http.version>
-    <!--deploy env-->
-    <revision>1.0-SNAPSHOT</revision>
-    <runtime-env>test</runtime-env>
+    <spark.version>3.1.0</spark.version>
+    <hadoop.version>3.1.2</hadoop.version>
+    <kafka.version>3.1.0</kafka.version>
+    <flink.version>1.14.3</flink.version>
+    
+    <fastjson.version>1.2.73</fastjson.version>
+    <roaringBitmap.version>0.9.15</roaringBitmap.version>
+    <protobuf.version>3.15.1</protobuf.version>
+    <log4j.version>2.14.1</log4j.version>
   </properties>
   
   <dependencies>
@@ -38,28 +32,62 @@
     <dependency>
       <groupId>org.roaringbitmap</groupId>
       <artifactId>RoaringBitmap</artifactId>
-      <version>0.9.15</version>
+      <version>${roaringBitmap.version}</version>
     </dependency>
   
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.2.73</version>
+      <version>${fastjson.version}</version>
     </dependency>
   
     <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
-<!--    <dependency>-->
-<!--      <groupId>org.apache.kafka</groupId>-->
-<!--      <artifactId>kafka_2.9.2</artifactId>-->
-<!--      <version>0.8.1.1</version>-->
-<!--    </dependency>-->
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka_${scala.compile.version}</artifactId>
+      <version>${kafka.version}</version>
+    </dependency>
   
+    <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>${kafka.version}</version>
+    </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-java -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-java</artifactId>
+      <version>${flink.version}</version>
+    </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-java -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-streaming-java_${scala.compile.version}</artifactId>
+      <version>${flink.version}</version>
+    </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-core -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-core</artifactId>
+      <version>${flink.version}</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-clients -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-clients_${scala.compile.version}</artifactId>
+      <version>${flink.version}</version>
+    </dependency>
   
   
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-common</artifactId>
-      <version>2.6.0</version>
+      <version>${hadoop.version}</version>
     </dependency>
   
     <!-- https://mvnrepository.com/artifact/graphframes/graphframes -->
@@ -99,49 +127,22 @@
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
-      <version>3.15.1</version>
-    </dependency>
-  
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.73</version>
+      <version>${protobuf.version}</version>
     </dependency>
   
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>2.14.1</version>
+      <version>${log4j.version}</version>
     </dependency>
   
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
-      <version>2.14.1</version>
+      <version>${log4j.version}</version>
     </dependency>
-  
-  
-    <!--    <dependency>-->
-<!--      <groupId>com.fasterxml.jackson.core</groupId>-->
-<!--      <artifactId>jackson-databind</artifactId>-->
-<!--      <version>2.12.3</version>-->
-<!--      <scope>test</scope>-->
-<!--    </dependency>-->
-  
-<!--    <dependency>-->
-<!--      <groupId>com.fasterxml.jackson.core</groupId>-->
-<!--      <artifactId>jackson-annotations</artifactId>-->
-<!--      <version>2.12.3</version>-->
-<!--      <scope>test</scope>-->
-<!--    </dependency>-->
-  
-<!--    <dependency>-->
-<!--      <groupId>com.fasterxml.jackson.core</groupId>-->
-<!--      <artifactId>jackson-core</artifactId>-->
-<!--      <version>2.12.3</version>-->
-<!--      <scope>test</scope>-->
-<!--    </dependency>-->
+    
   </dependencies>
   
   <build>
