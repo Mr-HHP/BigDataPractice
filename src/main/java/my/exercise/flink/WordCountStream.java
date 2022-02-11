@@ -16,8 +16,9 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 public class WordCountStream {
   public static void main(String[] args) throws Exception {
     // 创建流处理执行环境
-    StreamExecutionEnvironment streamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironment();
-    streamExecutionEnvironment.setParallelism(8);
+    StreamExecutionEnvironment streamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment();
+//    streamExecutionEnvironment.setParallelism(1);
+    
     // 从文件中读取数据
 //    String inputPath = "D:\\BigDataProject\\BigDataPractice\\src\\main\\resources\\word.txt";
 //    DataStream<String> stringDataStream = streamExecutionEnvironment.readTextFile(inputPath);
