@@ -1,4 +1,4 @@
-package my.exercise.spark.readAndWrite
+package my.exercise.spark.readandwrite
 
 import java.util.Properties
 

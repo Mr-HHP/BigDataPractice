@@ -1,4 +1,4 @@
-package my.exercise.spark.sparkSql
+package my.exercise.spark.sparksql
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 

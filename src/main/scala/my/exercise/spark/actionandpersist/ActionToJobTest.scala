@@ -1,4 +1,4 @@
-package my.exercise.spark.actionAndPersist
+package my.exercise.spark.actionandpersist
 
 import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 import org.apache.spark.sql.functions._

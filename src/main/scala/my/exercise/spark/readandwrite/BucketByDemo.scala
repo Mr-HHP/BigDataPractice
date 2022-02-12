@@ -1,4 +1,4 @@
-package my.exercise.spark.readAndWrite
+package my.exercise.spark.readandwrite
 
 import org.apache.spark.sql.catalyst.expressions.SortOrder
 import org.apache.spark.sql.{SaveMode, SparkSession}

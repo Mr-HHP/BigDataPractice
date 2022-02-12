@@ -1,4 +1,4 @@
-package my.exercise.spark.multipleOut
+package my.exercise.spark.multipleout
 
 import org.apache.hadoop.io.{BytesWritable, Text}
 import org.apache.hadoop.mapred.lib.{MultipleSequenceFileOutputFormat, MultipleTextOutputFormat}
