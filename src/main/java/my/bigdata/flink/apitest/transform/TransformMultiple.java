@@ -78,9 +78,13 @@ public class TransformMultiple {
         return new Tuple2<String, String>(value.getId(), "normal");
       }
     });
-  
     // 打印输出
     resultStream.print("result");
+    
+    // 3、union联合多条流
+    DataStream<SensorReading> unionStream = highStream.union(lowStream, processStream);
+    // 打印输出
+    unionStream.print("union");
     // 执行
     env.execute("TransformMultiple");
   }
