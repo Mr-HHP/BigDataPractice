@@ -31,9 +31,8 @@ public class TransformRollingAggregation {
       return new SensorReading(fields[0], Long.parseLong(fields[1]), Double.valueOf(fields[2]));
     });
     
-    // key选择器
     // 分组
-    KeyedStream<SensorReading, String> keyedStream = mapStream.keyBy(new KeySelector<SensorReading, String>() {
+    KeyedStream<SensorReading, String> keyBdStream = mapStream.keyBy(new KeySelector<SensorReading, String>() {
       @Override
       public String
       getKey(SensorReading value) throws Exception {
@@ -41,8 +40,13 @@ public class TransformRollingAggregation {
       }
     });
     // 滚动聚合， 取当前最大的温度值
+    DataStream<SensorReading> maxStream = keyBdStream.max("temperature");
+    SingleOutputStreamOperator<SensorReading> maxByStream = keyBdStream.maxBy("temperature");
   
     // 打印输出
+    maxStream.print("max");
+    maxByStream.print("maxBy");
+    
     // 执行
     env.execute("TransformRollingAggregation");
   }
