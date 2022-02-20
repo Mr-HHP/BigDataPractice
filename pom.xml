@@ -34,6 +34,40 @@
       <version>${flink.version}</version>
     </dependency>
   
+    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-java -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-java</artifactId>
+      <version>${flink.version}</version>
+    </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-java -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-streaming-java_${scala.compile.version}</artifactId>
+      <version>${flink.version}</version>
+    </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-core -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-core</artifactId>
+      <version>${flink.version}</version>
+    </dependency>
+  
+    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-clients -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-clients_${scala.compile.version}</artifactId>
+      <version>${flink.version}</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>org.apache.bahir</groupId>
+      <artifactId>flink-connector-redis_2.11</artifactId>
+      <version>1.0</version>
+    </dependency>
+  
     <!-- https://mvnrepository.com/artifact/org.roaringbitmap/RoaringBitmap -->
     <dependency>
       <groupId>org.roaringbitmap</groupId>
@@ -60,35 +94,6 @@
       <artifactId>kafka-clients</artifactId>
       <version>${kafka.version}</version>
     </dependency>
-  
-    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-java -->
-    <dependency>
-      <groupId>org.apache.flink</groupId>
-      <artifactId>flink-java</artifactId>
-      <version>${flink.version}</version>
-    </dependency>
-  
-    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-java -->
-    <dependency>
-      <groupId>org.apache.flink</groupId>
-      <artifactId>flink-streaming-java_${scala.compile.version}</artifactId>
-      <version>${flink.version}</version>
-    </dependency>
-  
-    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-core -->
-    <dependency>
-      <groupId>org.apache.flink</groupId>
-      <artifactId>flink-core</artifactId>
-      <version>${flink.version}</version>
-    </dependency>
-    
-    <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-clients -->
-    <dependency>
-      <groupId>org.apache.flink</groupId>
-      <artifactId>flink-clients_${scala.compile.version}</artifactId>
-      <version>${flink.version}</version>
-    </dependency>
-  
   
     <dependency>
       <groupId>org.apache.hadoop</groupId>
