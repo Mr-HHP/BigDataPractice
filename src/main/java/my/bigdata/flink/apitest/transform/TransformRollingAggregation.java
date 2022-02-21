@@ -34,8 +34,7 @@ public class TransformRollingAggregation {
     // 分组
     KeyedStream<SensorReading, String> keyBdStream = mapStream.keyBy(new KeySelector<SensorReading, String>() {
       @Override
-      public String
-      getKey(SensorReading value) throws Exception {
+      public String getKey(SensorReading value) throws Exception {
         return value.getId();
       }
     });
