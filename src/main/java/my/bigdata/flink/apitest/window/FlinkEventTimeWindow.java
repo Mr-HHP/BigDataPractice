@@ -14,6 +14,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.util.OutputTag;
 
 import java.time.Duration;
 
@@ -39,14 +40,19 @@ public class FlinkEventTimeWindow {
     })
       .assignTimestampsAndWatermarks(WatermarkStrategy.<SensorReading>forBoundedOutOfOrderness(Duration.ofMillis(200L))
         .withTimestampAssigner((SerializableTimestampAssigner<SensorReading>) (element, recordTimestamp) -> element.getTimestamp() * 1000));
+  
+    OutputTag<SensorReading> late = new OutputTag<SensorReading>("late"){};
     
-    // 基于事件时间的开窗聚合，统计15秒内的温度最小是
-    DataStream<SensorReading> minTempStream = watermarkStream
+    // 基于事件时间的开窗聚合，统计15秒内的温度最小值
+    SingleOutputStreamOperator<SensorReading> minTempStream = watermarkStream
       .keyBy((KeySelector<SensorReading, String>) SensorReading::getId)
       .window(TumblingEventTimeWindows.of(Time.seconds(15L)))
+      .allowedLateness(Time.minutes(1))
+      .sideOutputLateData(late)
       .min("temperature");
     
     minTempStream.print("minTemp");
+    minTempStream.getSideOutput(late).print("late");
     
     env.execute("FlinkEventTimeWindow");
   }
