@@ -2,9 +2,7 @@ package my.bigdata.flink.apitest.state;
 
 import my.bigdata.flink.apitest.bean.SensorReading;
 import org.apache.flink.api.common.functions.RichMapFunction;
-import org.apache.flink.api.common.state.StateDescriptor;
-import org.apache.flink.api.common.state.ValueState;
-import org.apache.flink.api.common.state.ValueStateDescriptor;
+import org.apache.flink.api.common.state.*;
 import org.apache.flink.api.common.typeinfo.TypeHint;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.java.functions.KeySelector;
@@ -46,6 +44,11 @@ public class KeyedState {
   public static class MyKeyCountMapper extends RichMapFunction<SensorReading, Integer> {
     private ValueState<Integer> keyCountState;
     
+    // 其他类型状态的声明
+    private ListState<String> myListState;
+    private MapState<String, Double> myMapState;
+    private ReducingState<SensorReading> myReduceState;
+    
     @Override
     public Integer map(SensorReading value) throws Exception {
       Integer stateValue = keyCountState.value();
@@ -53,7 +56,17 @@ public class KeyedState {
         Integer count = stateValue;
         count++;
         keyCountState.update(count);
+        // 其他状态aip调用
+        Iterable<String> strings = myListState.get();
+        myListState.add("hello");
+        
+        // map state
+        myMapState.get("1");
+        myMapState.put("2", 23.0);
+        // reducing state
+        myReduceState.add(null);
         return count;
+        
       } else {
         keyCountState.update(1);
         return 1;
@@ -66,6 +79,11 @@ public class KeyedState {
       }));
       // 在open方法中初始化状态
       keyCountState = getRuntimeContext().getState(valueStateDescriptor);
+      
+      myListState = getRuntimeContext().getListState(new ListStateDescriptor<String>("myListState", String.class));
+      myMapState = getRuntimeContext().getMapState(new MapStateDescriptor<String, Double>("myMapState", String.class, Double.class));
+      
+      myReduceState = getRuntimeContext().getReducingState(new ReducingStateDescriptor<SensorReading>("myReudceState", null, SensorReading.class));
     }
   }
 }
