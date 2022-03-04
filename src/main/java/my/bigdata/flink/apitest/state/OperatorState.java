@@ -53,8 +53,10 @@ public class OperatorState {
     @Override
     public Integer map(SensorReading value) throws Exception {
       count++;
+      System.out.println("map1:\t" + count);
+      System.out.println("countState:\t" + countState.get());
       for (Integer i : countState.get()) {
-        System.out.println("map:\t" + i);
+        System.out.println("map2:\t" + i);
       }
       return count;
     }
