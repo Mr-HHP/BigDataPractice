@@ -19,7 +19,7 @@ import org.apache.flink.util.Collector;
 public class ProcessFunctionApplicationCase {
   public static void main(String[] args) throws Exception {
     StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-    env.setParallelism(1);
+//    env.setParallelism(1);
     DataStreamSource<String> source = env.socketTextStream("localhost", 7777);
     SingleOutputStreamOperator<SensorReading> dataStream = source.map(line -> {
       String[] fields = line.split(",");
