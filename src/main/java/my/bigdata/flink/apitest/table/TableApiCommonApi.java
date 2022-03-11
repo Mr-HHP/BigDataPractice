@@ -8,6 +8,8 @@ import org.apache.flink.table.api.*;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 
+import static org.apache.flink.table.api.Expressions.$;
+
 /**
  * flink table common api案例
  *
@@ -50,9 +52,29 @@ public class TableApiCommonApi {
         tableEnv.createTemporaryTable("inputTable", tableDescriptor);
     
         Table inputTable = tableEnv.from("inputTable");
-        tableEnv.toDataStream(inputTable, Row.class).print();
-        inputTable.printSchema();
+//        tableEnv.toDataStream(inputTable, Row.class).print();
+//        inputTable.printSchema();
         
+        // 3. 查询转换
+        // 3.1 Table API
+        // 简单转换
+        Table resultTable = inputTable.select($("id"), $("temp"))
+            .filter($("id").isEqual("sensor_6"));
+        
+        // 聚合统计
+        Table aggTable = inputTable.groupBy($("id"))
+            .select($("id"), $("id").count(), $("temp").avg().as("avgTemp"));
+        
+        // 3.2 SQL
+        tableEnv.sqlQuery("select id, temp from inputTable where id = 'sensor_6'");
+        Table sqlAggTable = tableEnv.sqlQuery("select id, count(id) as count_id, avg(temp) from inputTable group by id");
+        
+        // 打印输出
+        tableEnv.toDataStream(resultTable, Row.class).print("result");
+        tableEnv.toChangelogStream(aggTable).print("agg");
+        tableEnv.toChangelogStream(sqlAggTable).print("sqlAgg");
+    
+    
         env.execute("TableApiCommonApi");
     }
 }
