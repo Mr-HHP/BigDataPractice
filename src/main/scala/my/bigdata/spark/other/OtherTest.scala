@@ -25,17 +25,19 @@ object OtherTest {
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder().master("local[*]").getOrCreate()
     import spark.implicits._
-    val userSeq: Seq[String] = Seq("cust_id01", "cust_id01", "cust_id01")
-    val userDs: Dataset[String] = userSeq.toDF("new_user_id").as[String]
+//    val userSeq: Seq[String] = Seq("cust_id01", "cust_id01", "cust_id01")
+//    val userDs: Dataset[String] = userSeq.toDF("new_user_id").as[String]
     val eventSeq: Seq[(String, String)] = Seq(("event","cust_id01"), ("event","cust_id01"), ("event1", "aaa"))
     val eventDs: Dataset[(String, String)] = eventSeq.toDF("event", "user_id").as[(String, String)]
-    val joinDs: Dataset[(String, String, String)] = eventDs.join(userDs, col("user_id") === col("new_user_id"), "left").as[(String, String, String)]
+//    val joinDs: Dataset[(String, String, String)] = eventDs.join(userDs, col("user_id") === col("new_user_id"), "left").as[(String, String, String)]
     
-    userDs.show(false)
+//    userDs.show(false)
     eventDs.show(false)
-    println("joinDs count: " + joinDs.count())
-    println("joinDs: ")
-    joinDs.collect().foreach(println)
+    eventDs.withColumn("event", when(col("event").equalTo(lit("event1")), lit("hahah")).otherwise(col("event")))
+      .show(false)
+//    println("joinDs count: " + joinDs.count())
+//    println("joinDs: ")
+//    joinDs.collect().foreach(println)
   }
   
   def csvDownloadLocal(fs: FileSystem, hdfsPath: String, localPath: String): Unit = {
