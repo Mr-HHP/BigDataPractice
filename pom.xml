@@ -16,7 +16,7 @@
     <scala.compile.version>2.12</scala.compile.version>
     <!-- hadoop -->
     <spark.version>3.1.0</spark.version>
-    <hadoop.version>3.2.0</hadoop.version>
+    <hadoop.version>3.1.0</hadoop.version>
     <kafka.version>3.1.0</kafka.version>
     <flink.version>1.14.3</flink.version>
     
@@ -167,11 +167,17 @@
       <version>${kafka.version}</version>
     </dependency>
     
-    <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-common</artifactId>
-      <version>${hadoop.version}</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.apache.hadoop</groupId>-->
+<!--      <artifactId>hadoop-common</artifactId>-->
+<!--      <version>${hadoop.version}</version>-->
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.apache.commons</groupId>-->
+<!--          <artifactId>commons-lang3</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
+<!--    </dependency>-->
     
     <!-- https://mvnrepository.com/artifact/graphframes/graphframes -->
     <!-- spark构建图第三方依赖 -->
