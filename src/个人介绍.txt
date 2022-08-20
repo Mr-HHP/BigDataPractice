@@ -1,0 +1,22 @@
+面试官上午（下午）好，我叫黄海鹏，我的毕业时间是2020年7月，工作经验是2年。
+Good afternoon, the interviewer. My name is Huang Haipeng. My student graduated in July 2020 with 2 years of working experience.
+目前我是在职状态。
+I am currently employed.
+我从大四下学期就进入了这家公司实习，毕业后就转正为正式员工，一直工作到现在，目前在这家公司已经工作两年半了。
+I have been working in this company since the second semester of my fourth year. After graduation, I became a regular employee and I have been working until now.
+在这两年半期间一直从事的是大数据开发工程师的岗位，主要负责公司自研产品的研发迭代和日常的产品运营工作。
+During the past two and a half years, I have been engaged in a big data development engineer, mainly responsible for the research and development iteration of the company's self-developed products and the daily product operation.
+我主要是负责离线方向的开发工作，开发语言主要是Java和Scala，工作中常用的技术框架主要是spark。
+I am mainly responsible for the development of the offline direction, the development language is mainly Java and Scala, and the technical framework commonly used in the work is mainly spark.
+我对其他的大数据组件也有一些了解，对实时方向的技术框架，比如flink、Kafka也有一些了解，但是暂时没有太深入的研究。
+I also have some knowledge about other big data components, and the technical framework of real-time direction, such as flink, Kafka, but I have not studied too deeply.
+我目前所在的公司是一家2B的数据服务公司，公司的产品和业务主要是数据化营销相关，给客户提供数据化营销的相关服务。
+The company that I currently work for is a 2B data service company, and the company's products and businesses are mainly related to data marketing, to provide customers with data marketing related services.
+我的公司目前有多款自研产品，广告数据分析服务、网站数据分析服务、移动应用数据分析服务。
+At present, my company has a number of self-developed products, including advertising data analysis service, website data analysis service and mobile application data analysis service.
+我主要负责的工作是网站数据和移动应用数据分析服务。
+I am mainly responsible for website data and mobile application data analysis services.
+针对客户的网站、落地页、移动端app、小程序的埋点数据进行分析和监测，帮助客户了解他们数据的用户来源分布，不同渠道的拉新能力，跟踪用户的站内行为、帮助客户勾勒用户画像，给客户提供营销决策上的数据支持。
+Analyze and monitor the embedded data of customers' websites, landing pages, mobile apps and small programs to help customers understand the user source distribution of their data, the ability to attract new information through different channels, track users' in-site behaviors, help customers sketch users' portraits, and provide customers with data support for marketing decisions.
+以上就是我简单的个人介绍，谢谢
+The above is my simple personal introduction, thank you
